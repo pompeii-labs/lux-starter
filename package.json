@@ -1,0 +1,18 @@
+{
+  "name": "lux-test",
+  "devDependencies": {
+    "@types/bun": "^1.3.14"
+  },
+  "private": true,
+  "scripts": {
+    "dev": "bun --filter '*' dev",
+    "dev:api": "bun --filter api dev",
+    "dev:web": "bun --filter @lux-test/web dev",
+    "build": "bun --filter @lux-test/web build",
+    "check": "bun --filter @lux-test/web check"
+  },
+  "type": "module",
+  "workspaces": [
+    "apps/*"
+  ]
+}
