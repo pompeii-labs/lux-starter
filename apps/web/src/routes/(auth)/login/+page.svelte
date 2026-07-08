@@ -4,9 +4,7 @@
 	import { AuthRoutes } from '$lib/routes';
 	import { Button } from '$lib/components/ui/button';
 	import { Card, CardContent } from '$lib/components/ui/card';
-	import { Separator } from '$lib/components/ui/separator';
 	import { optionalQueryString } from '$lib/utils';
-	import OauthSignIn from '../oauth-sign-in.svelte';
 	import type { PageProps } from './$types';
 	import LoginForm from './login-form.svelte';
 
@@ -27,12 +25,6 @@
 					form={data.emailForm}
 					next={page.url.searchParams.get('next') ?? resolve(AuthRoutes.postLogin)}
 				/>
-				<div class="my-6 flex items-center gap-2 text-muted-foreground">
-					<Separator class="shrink" />
-					<p class="text-sm text-nowrap">Or continue with</p>
-					<Separator class="shrink" />
-				</div>
-				<OauthSignIn />
 			</CardContent>
 		</Card>
 

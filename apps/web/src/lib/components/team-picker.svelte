@@ -3,12 +3,13 @@
     import * as Dialog from "$lib/components/ui/dialog";
     import { Button, type ButtonProps } from "$lib/components/ui/button";
     import type { Teams } from "$lib/types/lux";
+    import type { LuxAuthSession } from "@luxdb/sdk";
     import { resolve } from "$app/paths";
     import { ChevronsUpDownIcon, PlusIcon } from "@lucide/svelte";
     import CreateTeamForm from "../actions/create-team-form.svelte";
     import { goto } from "$app/navigation";
 
-    let { teams, selectedTeamId, ...triggerProps }: { teams: Teams[]; selectedTeamId?: Teams['id']; } & ButtonProps = $props();
+    let { teams, selectedTeamId, session, ...triggerProps }: { teams: Teams[]; selectedTeamId?: Teams['id']; session: LuxAuthSession; } & ButtonProps = $props();
 
     let selectedTeam: Teams | undefined = $derived(teams.find(t => t.id === selectedTeamId));
 
@@ -50,6 +51,7 @@
 <Dialog.Root bind:open={createDialogOpen}>
     <Dialog.Content>
         <CreateTeamForm
+            {session}
             onsuccess={(t) => {
                 goto(resolve("/(protected)/(dashboard)/[teamSlug]", { teamSlug: t.slug }));
                 createDialogOpen = false;
