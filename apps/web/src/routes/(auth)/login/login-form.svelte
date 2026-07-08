@@ -10,8 +10,6 @@
 	import { loginSchema, type LoginSchema } from './login-schema';
 	import { zod4Client } from 'sveltekit-superforms/adapters';
 	import { Input } from '$lib/components/ui/input';
-	import { AuthRoutes } from '$lib/routes';
-	import { resolve } from '$app/paths';
 
 	let { form: dataForm, next }: { form: SuperValidated<Infer<LoginSchema>>; next: string } =
 		$props();
@@ -43,15 +41,7 @@
 	<FormField {form} name="password">
 		<FormControl>
 			{#snippet children({ props })}
-				<div class="flex items-center justify-between">
-					<FormLabel>Password</FormLabel>
-					<a
-						class="text-sm text-muted-foreground hover:underline"
-						href={resolve(AuthRoutes.resetPassword)}
-					>
-						Forgot password?
-					</a>
-				</div>
+				<FormLabel>Password</FormLabel>
 				<Input
 					required
 					type="password"

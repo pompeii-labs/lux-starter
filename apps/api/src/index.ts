@@ -6,7 +6,7 @@ import Router from "./routes";
 
 const app = new Hono().basePath("/v1").use(cors());
 
-app.get("/", async (c) => c.status(200));
+app.get("/", (c) => c.text("ok"));
 
 app.route("/", Router);
 

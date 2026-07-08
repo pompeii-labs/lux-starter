@@ -71,7 +71,7 @@
             <p>Product</p>
             <Sidebar.Menu>
                 <Sidebar.MenuItem>
-                    <TeamPicker selectedTeamId={team.id} {teams} class={sidebarMenuButtonVariants({ variant: "outline", class: "justify-between" })} />
+                    <TeamPicker selectedTeamId={team.id} {teams} {session} class={sidebarMenuButtonVariants({ variant: "outline", class: "justify-between" })} />
                 </Sidebar.MenuItem>
             </Sidebar.Menu>
         </Sidebar.Header>
