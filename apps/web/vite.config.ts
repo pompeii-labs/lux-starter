@@ -25,6 +25,9 @@ export default defineConfig({
 		})
 	],
 	server: {
+		// Pompeii review sandboxes serve the dev server through *.e2b.app
+		// preview URLs; local dev is unaffected by this allowlist entry.
+		allowedHosts: [".e2b.app"],
 		proxy: {
 			'/api': 'http://localhost:3000',
 			'/ws': { target: 'ws://localhost:3000', ws: true }
