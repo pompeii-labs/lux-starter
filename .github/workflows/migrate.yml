@@ -1,0 +1,23 @@
+# Applies pending Lux migrations to your Lux Cloud project on every push to main
+# that touches lux/migrations/. Configure two repo settings first:
+#   - Secret  LUX_API_KEY  (a lux_... key from your Lux dashboard)
+#   - Variable LUX_PROJECT (your Lux project name, ID, or slug)
+name: Migrate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lux/migrations/**'
+  workflow_dispatch:
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply Lux migrations
+        uses: lux-db/actions/migrate@v1
+        with:
+          api-key: ${{ secrets.LUX_API_KEY }}
+          project: ${{ vars.LUX_PROJECT }}
