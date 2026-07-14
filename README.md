@@ -82,3 +82,19 @@ lux types                # refreshes lux/types/database.ts
 ```
 
 Keep the hand-written types in `apps/*/src/**/types/lux.ts` in sync with the schema until type generation is wired into both apps.
+
+## Continuous deployment
+
+`.github/workflows/migrate.yml` applies pending Lux migrations to your Lux Cloud
+project on every push to `main` that changes `lux/migrations/` (and on manual
+dispatch), using [`lux-db/actions/migrate@v1`](https://github.com/lux-db/actions).
+It installs the Lux CLI and runs `lux migrate run <project> --dir lux/migrations`.
+
+Set these in the repo's GitHub settings before it can run:
+
+| Kind     | Name          | Where                              | Value                                        |
+| -------- | ------------- | ---------------------------------- | -------------------------------------------- |
+| Secret   | `LUX_API_KEY` | Settings → Secrets and variables → Actions → Secrets   | A `lux_...` key from your Lux dashboard      |
+| Variable | `LUX_PROJECT` | Settings → Secrets and variables → Actions → Variables | Your Lux project name, ID, or slug           |
+
+`LUX_API_KEY` is a full-access key — keep it a secret, never a variable.
