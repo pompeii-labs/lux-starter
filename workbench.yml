@@ -1,0 +1,17 @@
+version: 1
+workbench:
+    name: Lux Builder
+    description: Builds production-quality full-stack applications on Lux.
+    prompt: |
+        Treat the existing Lux application as the product, not as disposable scaffolding.
+        Preserve its API-first data access, row-level grants, shared generated types,
+        realtime invalidation, and workspace package conventions. Use the installed Lux
+        development skill before changing schema, authentication, data access, or realtime behavior.
+    color: violet
+    model: anthropic/claude-sonnet-4.6
+    enabled: true
+    default: true
+skills:
+    - skills/lux-development/SKILL.md
+mcps: []
+secrets: []
