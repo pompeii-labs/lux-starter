@@ -1,0 +1,105 @@
+name: LuxLab
+
+options:
+  bundleIdPrefix: dev.luxdb
+  deploymentTarget:
+    iOS: "17.0"
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: 8SUFGKJ4Z8
+    SWIFT_VERSION: "6.0"
+    ENABLE_USER_SCRIPT_SANDBOXING: "NO"
+
+packages:
+  Lux:
+    path: ../../../lux-swift
+
+schemes:
+  LuxLab:
+    build:
+      targets:
+        LuxLab: all
+        LuxNotificationService: all
+        LuxLabTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - LuxLabTests
+    archive:
+      config: Release
+
+targets:
+  LuxLab:
+    type: application
+    platform: iOS
+    sources:
+      - path: LuxLab
+    dependencies:
+      - package: Lux
+      - target: LuxNotificationService
+        embed: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.luxdb.lab
+        PRODUCT_NAME: LuxLab
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_ENTITLEMENTS: LuxLab/LuxLab.entitlements
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: "NO"
+        ASSETCATALOG_COMPILER_APPICON_NAME: ""
+    info:
+      path: LuxLab/Info.plist
+      properties:
+        CFBundleDisplayName: Lux Lab
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        ITSAppUsesNonExemptEncryption: false
+        UILaunchScreen: {}
+        UIBackgroundModes: [remote-notification]
+        LuxAPNSEnvironment: sandbox
+        CFBundleURLTypes:
+          - CFBundleURLName: dev.luxdb.lab.auth
+            CFBundleURLSchemes: [lux-lab]
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+
+  LuxNotificationService:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: LuxNotificationService
+    dependencies:
+      - package: Lux
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.luxdb.lab.notification-service
+        PRODUCT_NAME: LuxNotificationService
+        CODE_SIGN_STYLE: Automatic
+        SKIP_INSTALL: YES
+    info:
+      path: LuxNotificationService/Info.plist
+      properties:
+        CFBundleDisplayName: Lux Lab Notification Service
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.usernotifications.service
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).NotificationService
+
+  LuxLabTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: LuxLabTests
+    dependencies:
+      - target: LuxLab
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.luxdb.lab.tests
+        CODE_SIGNING_ALLOWED: NO

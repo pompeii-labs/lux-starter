@@ -1,25 +1,24 @@
 <script lang="ts">
-	import './layout.css';
-	import favicon from '$lib/assets/favicon.svg';
-	import { onMount } from 'svelte';
 	import { invalidate } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import './layout.css';
 
 	let { children, data } = $props();
-	let { lux, session } = $derived(data);
 
 	onMount(() => {
-		const { unsubscribe } = lux.auth.onAuthStateChange((event, _session) => {
-			if (_session?.expires_at !== session?.expires_at) {
-				invalidate('lux:auth');
-			}
+		const subscription = data.lux.auth.onAuthStateChange((event) => {
+			if (event !== 'INITIAL_SESSION') void invalidate('lux:auth');
 		});
-
-		return () => unsubscribe();
+		return () => subscription.unsubscribe();
 	});
 </script>
 
-<svelte:head><link rel="icon" href={favicon} /></svelte:head>
+<svelte:head>
+	<title>Lux Lab</title>
+	<meta
+		name="description"
+		content="Full-stack Auth and Push validation for the Lux engine and SDKs"
+	/>
+</svelte:head>
 
-<div class="min-w-dvw max-w-dvw min-h-dvh max-h-dvh flex flex-col overflow-hidden">
-	{@render children()}
-</div>
+{@render children()}

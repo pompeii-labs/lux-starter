@@ -1,100 +1,124 @@
-# Lux Starter
+# Lux Lab
 
-A full-stack starter for small-team apps: auth, profiles, teams, members, and invites, updating in realtime.
+Lux Lab is the permanent full-stack proving ground for Lux. It runs real
+client applications against a real CLI-managed Lux project so unreleased
+engine and SDK changes can be exercised before they are merged or published.
 
-## Stack
+This repository is deliberately a skinny monorepo:
 
-| Layer    | Tech                                                              |
-| -------- | ----------------------------------------------------------------- |
-| Frontend | [SvelteKit 2](https://svelte.dev/docs/kit) (Svelte 5), Tailwind 4, shadcn-svelte, superforms + zod |
-| Backend  | [Hono](https://hono.dev) on [Bun](https://bun.sh)                 |
-| Data     | [Lux](https://luxdb.dev) — tables, auth, and realtime on one connection |
-
-```
-apps/
-  web/   SvelteKit app (UI, session cookies, calls the API)
-  api/   Hono API (bearer-auth'd, talks to Lux with the secret key)
-lux/
-  migrations/   schema + row-level access grants (*.lux)
-  types/        generated database types
+```text
+apps/ios   SwiftUI device lab using the sibling lux-swift checkout
+apps/web   SvelteKit browser-auth lab using the public TypeScript SDK
+apps/api   Bun/Hono trusted controller using the Lux secret key
+lux        The actual project consumed by `lux start`, migrations, and Studio
 ```
 
-Data access is API-first: the browser client is only used for auth/session and realtime `.live()` subscriptions; all reads/writes go through `apps/api`, which uses the Lux secret key.
+The first validation surface is **Auth + Push**. Database application APIs,
+realtime, storage, vectors, and other Lux features can be added as focused labs
+later without changing the repository shape.
 
-## Setup
+## Security boundaries
+
+| Surface | Credential | Responsibility |
+| --- | --- | --- |
+| iOS | Publishable key + user JWT | Native/web auth, durable session lifecycle, APNs registration |
+| Web | Publishable key + user JWT | Browser OAuth, SSR cookie persistence, session lifecycle |
+| API | Secret key | Engine diagnostics, device inspection, test notification sending |
+| Studio/CLI | Operator credential | Local project configuration and administration |
+
+No secret key, APNs token, OAuth token, P8 key, or tunnel credential belongs in
+the iOS or browser application, source control, logs, or verification reports.
+
+## Prerequisites
+
+- Docker Desktop
+- Bun
+- Xcode 16 or newer
+- XcodeGen (`brew install xcodegen`)
+- The Lux CLI built or installed
+- Sibling checkouts at `../lux` and `../lux-swift` when validating unreleased work
+
+## Local stack
+
+The project pins `ghcr.io/lux-db/lux:pr-validation`. Build the current engine
+stack into that local tag before booting Lux Lab:
 
 ```sh
-# 1. Install the Lux CLI (needs Docker running)
-curl -fsSL https://luxdb.dev/install.sh | sh
-
-# 2. Install dependencies
-bun install
-
-# 3. Boot Lux locally (applies lux/migrations, prints project keys)
-lux init
+docker build -t ghcr.io/lux-db/lux:pr-validation ../lux
 lux start
+lux status
+```
 
-# 4. Configure env — copy the examples, paste the keys `lux start` printed
-cp apps/web/.env.example apps/web/.env
-cp apps/api/.env.example apps/api/.env
+`lux start` creates the ignored local profile and `.env.local`, applies the
+committed migrations, starts the engine on `127.0.0.1:5890`, and starts Studio.
+It does not use a hand-written Compose substitute.
 
-# 5. Run everything
+Synchronize the generated local profile into the ignored app env files:
+
+```sh
+bun run env:local
+```
+
+The script copies only the publishable key into `apps/web/.env`, keeps the
+secret key in `apps/api/.env`, and creates a separate random
+`LAB_CONTROLLER_KEY` for privileged lab API routes. It never prints any of
+those values.
+
+## Web and API
+
+```sh
+bun install
 bun run dev
 ```
 
-## Services & ports
+| Service | URL |
+| --- | --- |
+| SvelteKit | http://localhost:5174 |
+| Hono controller | http://localhost:3000/v1 |
+| Lux engine | http://localhost:5890 |
+| Lux Studio | Printed by `lux start` |
 
-| Service        | Port | Command (from repo root)  |
-| -------------- | ---- | ------------------------- |
-| Web (SvelteKit)| 5173 | `bun run dev:web`         |
-| API (Hono)     | 3000 | `bun run dev:api`         |
-| Lux HTTP API   | 8080 | `lux start`               |
-| Lux (RESP)     | 6379 | `lux start`               |
+The browser callback URL is `http://localhost:5174/auth/callback`. Configure it
+in the Lux provider redirect allow-list. Provider consoles continue to point at
+the engine callback URL.
 
-Health check: `GET http://localhost:3000/v1` returns 200.
+## iOS
 
-## Environment variables
-
-| App        | Variable                     | Purpose                                  |
-| ---------- | ---------------------------- | ---------------------------------------- |
-| `apps/web` | `PUBLIC_LUX_URL`             | Lux endpoint (browser + SSR)             |
-| `apps/web` | `PUBLIC_LUX_PUBLISHABLE_KEY` | Public key; row-level security enforced  |
-| `apps/web` | `PUBLIC_API_URL`             | Base URL of the Hono API                 |
-| `apps/api` | `LUX_URL`                    | Lux endpoint                             |
-| `apps/api` | `LUX_SECRET_KEY`             | Full-access key — server only            |
-
-## Production build
+The Xcode project is generated from `apps/ios/project.yml` and resolves Lux from
+the sibling `../lux-swift` checkout:
 
 ```sh
-bun run build          # builds apps/web with adapter-node
-bun run --cwd apps/web start   # serves the built app on :5173
-bun run --cwd apps/api start   # serves the API on :3000
+bun run ios:generate
+open apps/ios/LuxLab.xcodeproj
 ```
 
-## Schema changes
+Simulator builds can use `http://127.0.0.1:5890`. A physical iPhone must use a
+trusted HTTPS URL. Route a stable development hostname to the loopback-bound
+engine with a tunnel; do not expose Studio or weaken Lux Swift's HTTP policy.
+See [`infra/tunnel/README.md`](infra/tunnel/README.md) for the intended boundary.
 
-Add a migration, then regenerate types:
+Configure the project URL and publishable key inside Lux Lab. They are stored in
+the app's local preferences and can be cleared from the Diagnostics screen.
+
+## Verification
+
+Run the automated gates:
 
 ```sh
-lux migrate new <name>   # edit the new file in lux/migrations/
-lux migrate run
-lux types                # refreshes lux/types/database.ts
+bun test
+bun run check
+bun run build
+bun run ios:build
+bun run smoke:local
 ```
 
-Keep the hand-written types in `apps/*/src/**/types/lux.ts` in sync with the schema until type generation is wired into both apps.
+Then complete [verification/auth-push.md](verification/auth-push.md) on a
+physical iPhone. Record the exact engine and SDK commits under
+`verification/runs/`; redact every credential and device token.
 
-## Continuous deployment
+## Local and Cloud parity
 
-`.github/workflows/migrate.yml` applies pending Lux migrations to your Lux Cloud
-project on every push to `main` that changes `lux/migrations/` (and on manual
-dispatch), using [`lux-db/actions/migrate@v1`](https://github.com/lux-db/actions).
-It installs the Lux CLI and runs `lux migrate run <project> --dir lux/migrations`.
-
-Set these in the repo's GitHub settings before it can run:
-
-| Kind     | Name          | Where                              | Value                                        |
-| -------- | ------------- | ---------------------------------- | -------------------------------------------- |
-| Secret   | `LUX_API_KEY` | Settings → Secrets and variables → Actions → Secrets   | A `lux_...` key from your Lux dashboard      |
-| Variable | `LUX_PROJECT` | Settings → Secrets and variables → Actions → Variables | Your Lux project name, ID, or slug           |
-
-`LUX_API_KEY` is a full-access key — keep it a secret, never a variable.
+Lux Lab is environment-driven. The same iOS, web, and API code should be run
+against both the dedicated local project and a dedicated Lux Cloud project.
+Changing environments changes URLs and keys only; it must not fork application
+behavior.

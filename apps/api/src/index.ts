@@ -1,18 +1,12 @@
-import { Hono } from "hono";
-import * as Bun from "bun";
-import { cors } from "hono/cors";
-import Router from "./routes";
+import { createLabApp } from './app';
+import { loadConfig } from './config';
 
-
-const app = new Hono().basePath("/v1").use(cors());
-
-app.get("/", (c) => c.text("ok"));
-
-app.route("/", Router);
+const config = loadConfig();
+const app = createLabApp(config);
 
 const server = Bun.serve({
-    port: 3000,
-    fetch: app.fetch,
+	port: config.port,
+	fetch: app.fetch
 });
 
-console.log(`Listening on ${server.url}`);
+console.log(`Lux Lab API listening on ${server.url}`);

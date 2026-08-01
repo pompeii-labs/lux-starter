@@ -1,0 +1,599 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6171E1F95E0C1FA647092274 /* LabConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2495C58D2568139DCD202ADE /* LabConfiguration.swift */; };
+		6587FC6B41E470512FD33BBF /* LabConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69075E52CDCE256964595703 /* LabConfigurationTests.swift */; };
+		6A477FB65000DA56FD0C3B57 /* LuxNotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3C5B34026B6FB9F1CA9D000B /* LuxNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6D58532FCEA98867B6CB2D68 /* LuxLabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0B0D13B9A471A9BA02BEAE /* LuxLabApp.swift */; };
+		B96C56ECDD26E7A3E8422632 /* Lux in Frameworks */ = {isa = PBXBuildFile; productRef = 4DCF31320547D97FFB2D089B /* Lux */; };
+		C0DF54F7D207DCBB7BD64B9A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E664F06560DFD43D63089E58 /* NotificationService.swift */; };
+		D68175CD2436210786B7C823 /* LabPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B87A9F5089A31AB58E0605 /* LabPlatform.swift */; };
+		DA058CF23F210B6161D0818D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174B6134F7283847BBFD3BE7 /* ContentView.swift */; };
+		F2774E3540046EF2FFAF3DDA /* Lux in Frameworks */ = {isa = PBXBuildFile; productRef = 22E28FF08017DF0D75AC3544 /* Lux */; };
+		F41996B76EE2E3FEACA7DC61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECEB76BAD6F96E4B9DE22B8 /* AppDelegate.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7713EB1E87A24F38F25EA062 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4607EB8D01E44AE3AB97E611 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BC80E3FFB52DB4B1CC80376;
+			remoteInfo = LuxNotificationService;
+		};
+		C11F50B700CEAE23AC1B9185 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4607EB8D01E44AE3AB97E611 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D30F6D517627709D7871716;
+			remoteInfo = LuxLab;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DD1B9A2A07439A50D6B58FC2 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6A477FB65000DA56FD0C3B57 /* LuxNotificationService.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		174B6134F7283847BBFD3BE7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		232031B2B69CB16968A7DE57 /* LuxLab.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = LuxLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2495C58D2568139DCD202ADE /* LabConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabConfiguration.swift; sourceTree = "<group>"; };
+		24FF95426EE43109B65E9217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		30092C5F8FBB6061597EC852 /* LuxLabTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = LuxLabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C5B34026B6FB9F1CA9D000B /* LuxNotificationService.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = LuxNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		69075E52CDCE256964595703 /* LabConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabConfigurationTests.swift; sourceTree = "<group>"; };
+		915C1EB722F19E198898C267 /* lux-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "lux-swift"; path = "../../../lux-swift"; sourceTree = SOURCE_ROOT; };
+		BDCE93F2C985FEAB3E8F8E5E /* LuxLab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LuxLab.entitlements; sourceTree = "<group>"; };
+		C9CC2D6DB3ED489CC03C8CF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CECEB76BAD6F96E4B9DE22B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DF0B0D13B9A471A9BA02BEAE /* LuxLabApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuxLabApp.swift; sourceTree = "<group>"; };
+		E664F06560DFD43D63089E58 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		F8B87A9F5089A31AB58E0605 /* LabPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabPlatform.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2C20533B4832DCF0B12F592D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2774E3540046EF2FFAF3DDA /* Lux in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B718133AA25EBA9F73C2CD7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B96C56ECDD26E7A3E8422632 /* Lux in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5C4A4103AC4542D28DB3FA01 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				232031B2B69CB16968A7DE57 /* LuxLab.app */,
+				30092C5F8FBB6061597EC852 /* LuxLabTests.xctest */,
+				3C5B34026B6FB9F1CA9D000B /* LuxNotificationService.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9DE0E196F307D2633866F9BA /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				915C1EB722F19E198898C267 /* lux-swift */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		AA8B51B2CCB70C17BF158ADE /* LuxLab */ = {
+			isa = PBXGroup;
+			children = (
+				CECEB76BAD6F96E4B9DE22B8 /* AppDelegate.swift */,
+				174B6134F7283847BBFD3BE7 /* ContentView.swift */,
+				C9CC2D6DB3ED489CC03C8CF7 /* Info.plist */,
+				2495C58D2568139DCD202ADE /* LabConfiguration.swift */,
+				F8B87A9F5089A31AB58E0605 /* LabPlatform.swift */,
+				BDCE93F2C985FEAB3E8F8E5E /* LuxLab.entitlements */,
+				DF0B0D13B9A471A9BA02BEAE /* LuxLabApp.swift */,
+			);
+			path = LuxLab;
+			sourceTree = "<group>";
+		};
+		D52F161E255EE52E0ACF1914 /* LuxNotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				24FF95426EE43109B65E9217 /* Info.plist */,
+				E664F06560DFD43D63089E58 /* NotificationService.swift */,
+			);
+			path = LuxNotificationService;
+			sourceTree = "<group>";
+		};
+		E97F1A9C29F0EDDCD69D7051 /* LuxLabTests */ = {
+			isa = PBXGroup;
+			children = (
+				69075E52CDCE256964595703 /* LabConfigurationTests.swift */,
+			);
+			path = LuxLabTests;
+			sourceTree = "<group>";
+		};
+		F7D470B7ACDCC866F03B3C6C = {
+			isa = PBXGroup;
+			children = (
+				AA8B51B2CCB70C17BF158ADE /* LuxLab */,
+				E97F1A9C29F0EDDCD69D7051 /* LuxLabTests */,
+				D52F161E255EE52E0ACF1914 /* LuxNotificationService */,
+				9DE0E196F307D2633866F9BA /* Packages */,
+				5C4A4103AC4542D28DB3FA01 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0D30F6D517627709D7871716 /* LuxLab */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B114A59A8A7BE09092125513 /* Build configuration list for PBXNativeTarget "LuxLab" */;
+			buildPhases = (
+				7458FAD49E8122E4C213F8E6 /* Sources */,
+				7B718133AA25EBA9F73C2CD7 /* Frameworks */,
+				DD1B9A2A07439A50D6B58FC2 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FDB7F29FF560D4C7E48230C5 /* PBXTargetDependency */,
+			);
+			name = LuxLab;
+			packageProductDependencies = (
+				4DCF31320547D97FFB2D089B /* Lux */,
+			);
+			productName = LuxLab;
+			productReference = 232031B2B69CB16968A7DE57 /* LuxLab.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6BC80E3FFB52DB4B1CC80376 /* LuxNotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B4BA31039226F4D9F569045B /* Build configuration list for PBXNativeTarget "LuxNotificationService" */;
+			buildPhases = (
+				01511B2F4991C887479C219E /* Sources */,
+				2C20533B4832DCF0B12F592D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LuxNotificationService;
+			packageProductDependencies = (
+				22E28FF08017DF0D75AC3544 /* Lux */,
+			);
+			productName = LuxNotificationService;
+			productReference = 3C5B34026B6FB9F1CA9D000B /* LuxNotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		987996391AD96333FCC7D2E4 /* LuxLabTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7218DDC0B126E3DDC2E22AA2 /* Build configuration list for PBXNativeTarget "LuxLabTests" */;
+			buildPhases = (
+				FEDA817D6AE78AFFA64A2CCB /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				857065BD8CE21F37EE5E0D8A /* PBXTargetDependency */,
+			);
+			name = LuxLabTests;
+			packageProductDependencies = (
+			);
+			productName = LuxLabTests;
+			productReference = 30092C5F8FBB6061597EC852 /* LuxLabTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4607EB8D01E44AE3AB97E611 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					0D30F6D517627709D7871716 = {
+						DevelopmentTeam = 8SUFGKJ4Z8;
+						ProvisioningStyle = Automatic;
+					};
+					6BC80E3FFB52DB4B1CC80376 = {
+						DevelopmentTeam = 8SUFGKJ4Z8;
+						ProvisioningStyle = Automatic;
+					};
+					987996391AD96333FCC7D2E4 = {
+						DevelopmentTeam = 8SUFGKJ4Z8;
+					};
+				};
+			};
+			buildConfigurationList = 9F85A1868AAB1B0EB90B8E76 /* Build configuration list for PBXProject "LuxLab" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = F7D470B7ACDCC866F03B3C6C;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8D784AC3A92ED55C7A8A7498 /* XCLocalSwiftPackageReference "../../../lux-swift" */,
+			);
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0D30F6D517627709D7871716 /* LuxLab */,
+				987996391AD96333FCC7D2E4 /* LuxLabTests */,
+				6BC80E3FFB52DB4B1CC80376 /* LuxNotificationService */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		01511B2F4991C887479C219E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0DF54F7D207DCBB7BD64B9A /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7458FAD49E8122E4C213F8E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F41996B76EE2E3FEACA7DC61 /* AppDelegate.swift in Sources */,
+				DA058CF23F210B6161D0818D /* ContentView.swift in Sources */,
+				6171E1F95E0C1FA647092274 /* LabConfiguration.swift in Sources */,
+				D68175CD2436210786B7C823 /* LabPlatform.swift in Sources */,
+				6D58532FCEA98867B6CB2D68 /* LuxLabApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEDA817D6AE78AFFA64A2CCB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6587FC6B41E470512FD33BBF /* LabConfigurationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		857065BD8CE21F37EE5E0D8A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D30F6D517627709D7871716 /* LuxLab */;
+			targetProxy = C11F50B700CEAE23AC1B9185 /* PBXContainerItemProxy */;
+		};
+		FDB7F29FF560D4C7E48230C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6BC80E3FFB52DB4B1CC80376 /* LuxNotificationService */;
+			targetProxy = 7713EB1E87A24F38F25EA062 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		052612988CE804E80AD543B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = LuxLab/LuxLab.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = LuxLab/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.luxdb.lab;
+				PRODUCT_NAME = LuxLab;
+				SDKROOT = iphoneos;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		3856BEC60FEA00E14AB3DB66 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 8SUFGKJ4Z8;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		492AFDA81F2A56E5C7DEB080 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = LuxNotificationService/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.luxdb.lab.notification-service";
+				PRODUCT_NAME = LuxNotificationService;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A68163ECC4761ADE171F36A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 8SUFGKJ4Z8;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		CD366E098E8DB47AE3232DD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = LuxLab/LuxLab.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = LuxLab/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.luxdb.lab;
+				PRODUCT_NAME = LuxLab;
+				SDKROOT = iphoneos;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		D419C59069DB21606EB1A0C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGNING_ALLOWED = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.luxdb.lab.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LuxLab.app/LuxLab";
+			};
+			name = Release;
+		};
+		E194D75E10C71A36305F24C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGNING_ALLOWED = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.luxdb.lab.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LuxLab.app/LuxLab";
+			};
+			name = Debug;
+		};
+		E64B073DCCB8D7519994B1CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = LuxNotificationService/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.luxdb.lab.notification-service";
+				PRODUCT_NAME = LuxNotificationService;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7218DDC0B126E3DDC2E22AA2 /* Build configuration list for PBXNativeTarget "LuxLabTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E194D75E10C71A36305F24C6 /* Debug */,
+				D419C59069DB21606EB1A0C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9F85A1868AAB1B0EB90B8E76 /* Build configuration list for PBXProject "LuxLab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3856BEC60FEA00E14AB3DB66 /* Debug */,
+				A68163ECC4761ADE171F36A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B114A59A8A7BE09092125513 /* Build configuration list for PBXNativeTarget "LuxLab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				052612988CE804E80AD543B1 /* Debug */,
+				CD366E098E8DB47AE3232DD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B4BA31039226F4D9F569045B /* Build configuration list for PBXNativeTarget "LuxNotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				492AFDA81F2A56E5C7DEB080 /* Debug */,
+				E64B073DCCB8D7519994B1CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		8D784AC3A92ED55C7A8A7498 /* XCLocalSwiftPackageReference "../../../lux-swift" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../lux-swift";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		22E28FF08017DF0D75AC3544 /* Lux */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Lux;
+		};
+		4DCF31320547D97FFB2D089B /* Lux */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Lux;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 4607EB8D01E44AE3AB97E611 /* Project object */;
+}

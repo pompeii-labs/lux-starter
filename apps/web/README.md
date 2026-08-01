@@ -1,42 +1,30 @@
-# sv
+# Lux Lab Web
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+This SvelteKit application exercises the public Lux browser-auth surface
+against the same project as the native lab. It intentionally stays small: one
+screen exposes engine health, password and anonymous auth, Apple/Google/GitHub
+OAuth, refresh, sign-out, and a redacted event timeline.
 
-## Creating a project
+It uses `@luxdb/sdk` directly. Only `PUBLIC_LUX_URL` and the publishable key are
+available to browser code; the Lux secret and lab controller credential live in
+the API process.
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
+## Run
 
 ```sh
-# recreate this project
-bun x sv@0.16.1 create --template minimal --types ts --install bun apps/web
+bun run env:local
+bun run dev:web
 ```
 
-## Developing
+The local page is fixed at `http://localhost:5174` and the OAuth return route is
+`http://localhost:5174/auth/callback`. Add that exact URL to the Lux provider
+redirect allow-list. Provider consoles still use the callback URL exposed by
+the Lux engine.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Verify
 
 ```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+bun test
+bun run check
+bun run build
 ```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.

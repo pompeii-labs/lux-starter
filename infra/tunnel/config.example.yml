@@ -1,0 +1,13 @@
+# Keep the real credential file outside the repository. This template exposes
+# the engine only; Studio stays loopback-only and must never be tunneled.
+tunnel: <TUNNEL_UUID>
+credentials-file: /absolute/path/outside/repo/<TUNNEL_UUID>.json
+
+ingress:
+  - hostname: engine.lab.luxdb.dev
+    service: http://127.0.0.1:5890
+  - hostname: web.lab.luxdb.dev
+    service: http://127.0.0.1:5174
+  - hostname: api.lab.luxdb.dev
+    service: http://127.0.0.1:3000
+  - service: http_status:404

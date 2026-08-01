@@ -1,0 +1,4 @@
+# A tiny canary proves that the real Lux migration ledger was applied. Client
+# applications do not depend on this table; Auth + Push remain the first lab.
+TCREATE lab_markers id UUID PRIMARY KEY DEFAULT uuid(), created_at TIMESTAMP DEFAULT now(), name STR NOT NULL
+GRANT read ON lab_markers

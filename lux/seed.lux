@@ -1,0 +1,2 @@
+# Intentionally empty. Auth users, provider credentials, APNs credentials, and
+# device tokens are environment-specific and must never be committed as seeds.
