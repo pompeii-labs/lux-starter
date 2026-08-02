@@ -67,7 +67,8 @@ in this record.
   manual session refresh succeeded.
 - [x] Native Sign in with Apple succeeded, and succeeded again after signing
   out and repeating authorization.
-- [ ] Complete native password sign-in.
+- [x] A throwaway password user was created on-device, signed out, and signed
+  back in with the same credentials.
 - [ ] Complete Google and GitHub PKCE through a public HTTPS callback.
 - [ ] Complete native OAuth cancellation.
 - [ ] Physically exercise invalid/oversized image fallback and APNs token
