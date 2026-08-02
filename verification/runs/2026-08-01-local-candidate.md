@@ -65,7 +65,8 @@ in this record.
   receipt remained visible after a force-quit and relaunch.
 - [x] The authenticated user restored from Keychain after force-quit, and a
   manual session refresh succeeded.
-- [ ] Complete native Apple authorization, including a repeat authorization.
+- [x] Native Sign in with Apple succeeded, and succeeded again after signing
+  out and repeating authorization.
 - [ ] Complete native password sign-in.
 - [ ] Complete Google and GitHub PKCE through a public HTTPS callback.
 - [ ] Complete native OAuth cancellation.
