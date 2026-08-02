@@ -98,6 +98,8 @@ final class LabPlatform {
             do {
                 try await operation()
                 record(name)
+            } catch is CancellationError {
+                record("\(name) cancelled")
             } catch {
                 lastError = error.localizedDescription
                 record("\(name) failed", detail: error.localizedDescription)
