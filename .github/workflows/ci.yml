@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: lux-db/lux-swift
-          ref: 3b79f96d6f4075354a0e60d971fc0718af833ea6
+          ref: 6a834a850d0eb6f2c2b06e3babccfaff35319c39
           path: lux-swift
       - run: mv lux-swift ../lux-swift
       - run: brew install xcodegen jq

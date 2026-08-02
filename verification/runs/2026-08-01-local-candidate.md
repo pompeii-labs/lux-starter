@@ -4,9 +4,9 @@
 
 - Engine: `7df31770c4839be183f70306f61abd5284d9f353`
   (`chore/engine-0.37.0`)
-- Lux Swift: `3b79f96d6f4075354a0e60d971fc0718af833ea6`
+- Lux Swift: `6a834a850d0eb6f2c2b06e3babccfaff35319c39`
   (`fix/swift-1-1-hardening`)
-- Lux Lab: `925bcaac84a9847db91e8812fe364a937e8ce945`
+- Lux Lab: `9b7fd646afae6166c5eb1ee4d589fbaae609c8a66`
   (`feat/lux-lab` implementation candidate)
 - Engine profile: CLI-managed local project using the locally built
   `ghcr.io/lux-db/lux:pr-validation` image
@@ -21,7 +21,7 @@ in this record.
 
 - [x] Full candidate engine unit, integration, reliability, and doc-test suite
   completed with no failures.
-- [x] Lux Swift package completed 48 tests across 6 suites with no failures.
+- [x] Lux Swift package completed 51 tests across 6 suites with no failures.
 - [x] The 1.1 candidate introduced no breaking changes from the `1.0.0`
   public API.
 - [x] Lux Swift built for iOS Simulator, generated DocC, and type-checked the
@@ -70,7 +70,8 @@ in this record.
 - [x] A throwaway password user was created on-device, signed out, and signed
   back in with the same credentials.
 - [ ] Complete Google and GitHub PKCE through a public HTTPS callback.
-- [ ] Complete native OAuth cancellation.
+- [x] Native Apple cancellation returned the app to a signed-out idle state
+  without presenting the system cancellation as an authentication failure.
 - [ ] Physically exercise invalid/oversized image fallback and APNs token
   rotation. Both remain covered by automated contract tests only.
 
