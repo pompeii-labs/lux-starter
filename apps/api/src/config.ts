@@ -13,7 +13,7 @@ function required(name: string): string {
 }
 
 export function loadConfig(): LabConfig {
-	const rawPort = process.env.PORT ?? '3000';
+	const rawPort = process.env.PORT ?? '15892';
 	const port = Number(rawPort);
 	if (!Number.isInteger(port) || port < 1 || port > 65_535) {
 		throw new Error(`PORT must be a valid TCP port, received ${rawPort}`);

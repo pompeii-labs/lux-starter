@@ -6,5 +6,5 @@ project_name = "lux-lab"
 engine_version = "pr-validation"
 
 # Stable ports keep the tunnel and device configuration deterministic.
-local_http_port = 5890
-local_resp_port = 6386
+local_http_port = 15890
+local_resp_port = 15894

@@ -18,7 +18,7 @@ function parse(source: string): Map<string, string> {
 }
 
 const env = parse(await Bun.file('.env.local').text());
-const baseURL = env.get('LUX_URL')?.replace(/\/+$/, '');
+const baseURL = (process.env.LUX_SMOKE_URL || env.get('LUX_URL'))?.replace(/\/+$/, '');
 const publishableKey = env.get('LUX_PUBLISHABLE_KEY');
 const secretKey = env.get('LUX_SECRET_KEY');
 if (!baseURL || !publishableKey || !secretKey) {
@@ -61,7 +61,7 @@ try {
 		luxURL: baseURL,
 		luxSecretKey: secretKey,
 		controllerKey,
-		port: 3000,
+		port: 15892,
 		fetch: globalThis.fetch
 	});
 	await expectStatus(
@@ -85,7 +85,7 @@ try {
 			body: JSON.stringify({
 				redirect_allow_list: [
 					'lux-lab://auth/callback',
-					'http://localhost:5174/auth/callback'
+					'http://localhost:15893/auth/callback'
 				]
 			})
 		}),

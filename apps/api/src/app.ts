@@ -10,6 +10,14 @@ const sendSchema = z.object({
 	notification: z.record(z.string(), z.unknown())
 });
 
+const selfSendSchema = z.object({
+	notification: z.record(z.string(), z.unknown())
+});
+
+const currentUserSchema = z.object({
+	user: z.object({ id: z.string().min(1) })
+});
+
 function authorized(request: Request, expected: string): boolean {
 	const supplied = request.headers.get('authorization')?.replace(/^Bearer\s+/i, '') ?? '';
 	const left = Buffer.from(supplied);
@@ -54,6 +62,31 @@ export function createLabApp(config: LabConfig): Hono {
 				503
 			);
 		}
+	});
+
+	app.post('/me/push', async (c) => {
+		const accessToken = c.req.header('authorization')?.replace(/^Bearer\s+/i, '').trim();
+		if (!accessToken) return c.json({ error: 'authenticated Lux session required' }, 401);
+
+		const parsed = selfSendSchema.safeParse(await c.req.json().catch(() => null));
+		if (!parsed.success) {
+			return c.json({ error: 'invalid push request', issues: parsed.error.issues }, 400);
+		}
+
+		const userResponse = await luxRequest(config, 'auth/v1/user', {}, accessToken);
+		if (!userResponse.ok) return forwardLux(userResponse);
+		const user = currentUserSchema.safeParse(await userResponse.json());
+		if (!user.success) return c.json({ error: 'Lux returned an invalid user response' }, 502);
+
+		return forwardLux(
+			await luxRequest(config, 'push/send', {
+				method: 'POST',
+				body: JSON.stringify({
+					subject_id: user.data.user.id,
+					notification: parsed.data.notification
+				})
+			})
+		);
 	});
 
 	app.use('/push/*', async (c, next) => {

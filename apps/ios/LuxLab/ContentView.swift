@@ -20,6 +20,7 @@ struct ContentView: View {
 private struct OverviewView: View {
     @Environment(LabPlatform.self) private var platform
     @State private var url = ""
+    @State private var apiURL = ""
     @State private var key = ""
 
     var body: some View {
@@ -27,6 +28,7 @@ private struct OverviewView: View {
         Form {
             Section("Active project") {
                 LabeledContent("URL", value: platform.configuration.projectURL)
+                LabeledContent("Lab API", value: platform.configuration.apiURL)
                 LabeledContent("Publishable key", value: platform.configuration.displayKey)
                 LabeledContent("SDK", value: "Lux Swift 1.1 candidate")
                 LabeledContent("Engine", value: "0.37 candidate")
@@ -35,17 +37,20 @@ private struct OverviewView: View {
                 TextField("https://engine.lab.luxdb.dev", text: $url)
                     .textInputAutocapitalization(.never)
                     .keyboardType(.URL)
+                TextField("http://10.0.0.144:15892", text: $apiURL)
+                    .textInputAutocapitalization(.never)
+                    .keyboardType(.URL)
                 TextField("lux_pub_…", text: $key)
                     .textInputAutocapitalization(.never)
                     .privacySensitive()
                 Button("Save and reconnect") {
-                    platform.saveConfiguration(.init(projectURL: url, publishableKey: key))
+                    platform.saveConfiguration(.init(projectURL: url, publishableKey: key, apiURL: apiURL))
                 }
-                .disabled(!LabConfiguration(projectURL: url, publishableKey: key).isUsable)
+                .disabled(!LabConfiguration(projectURL: url, publishableKey: key, apiURL: apiURL).isUsable)
             } header: {
                 Text("Connection")
             } footer: {
-                Text("Simulator may use 127.0.0.1. A physical phone requires the stable HTTPS tunnel; secret keys are rejected by Lux Swift.")
+                Text("Simulator may use 127.0.0.1. A physical phone may use an explicit trusted-LAN profile or HTTPS; public cleartext URLs and secret keys are rejected by Lux Swift.")
             }
             if let error = platform.lastError {
                 Section("Latest error") { Text(error).foregroundStyle(.red) }
@@ -54,6 +59,7 @@ private struct OverviewView: View {
         .navigationTitle("Lux Lab")
         .onAppear {
             url = platform.configuration.projectURL
+            apiURL = platform.configuration.apiURL
             key = platform.configuration.publishableKey
         }
     }
@@ -133,6 +139,9 @@ private struct PushLabView: View {
                     Button("Refresh server devices") {
                         platform.perform("push devices refreshed") { try await platform.refreshDevices() }
                     }.disabled(!project.auth.isAuthenticated || platform.isBusy)
+                    Button("Send test push to this user") {
+                        platform.perform("test push enqueued") { try await platform.sendTestPush() }
+                    }.disabled(!project.auth.isAuthenticated || !project.push.isRegistered || platform.isBusy)
                 }
                 Section("Authenticated user's devices") {
                     if platform.devices.isEmpty { Text("No server-side device rows").foregroundStyle(.secondary) }
@@ -185,6 +194,11 @@ private struct DiagnosticsView: View {
                         Text("\(receipt.source) · \(receipt.date.formatted(date: .omitted, time: .standard))")
                             .font(.caption).foregroundStyle(.secondary)
                         if !receipt.dataKeys.isEmpty { Text("data: \(receipt.dataKeys.joined(separator: ", "))").font(.caption2.monospaced()) }
+                    }
+                }
+                if !platform.receivedPushes.isEmpty {
+                    Button("Clear notification history", role: .destructive) {
+                        platform.clearReceivedPushes()
                     }
                 }
             }

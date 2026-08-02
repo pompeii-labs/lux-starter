@@ -7,7 +7,7 @@ function fixture(fetch: LabConfig['fetch']): LabConfig {
 		luxURL: 'http://engine.test',
 		luxSecretKey: 'lux_sec_test',
 		controllerKey: 'controller-test',
-		port: 3000,
+		port: 15892,
 		fetch
 	};
 }
@@ -60,6 +60,37 @@ describe('Lux Lab API', () => {
 		expect(forwarded?.url).toBe('http://engine.test/push/send');
 		expect(await forwarded?.json()).toEqual({
 			subject_id: 'user-1',
+			notification: { title: 'Lux Lab', body: 'Push works' }
+		});
+	});
+
+	test('self push derives its subject from the authenticated Lux session', async () => {
+		const forwarded: Request[] = [];
+		const app = createLabApp(
+			fixture(async (input, init) => {
+				const request = input instanceof Request ? input : new Request(input.toString(), init);
+				forwarded.push(request);
+				if (request.url.endsWith('/auth/v1/user')) {
+					return Response.json({ user: { id: 'verified-user' } });
+				}
+				return Response.json({ enqueued: 1 });
+			})
+		);
+		const response = await app.request('/v1/me/push', {
+			method: 'POST',
+			headers: {
+				authorization: 'Bearer user-access-token',
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify({ notification: { title: 'Lux Lab', body: 'Push works' } })
+		});
+
+		expect(response.status).toBe(200);
+		expect(forwarded).toHaveLength(2);
+		expect(forwarded[0]?.headers.get('authorization')).toBe('Bearer user-access-token');
+		expect(forwarded[1]?.headers.get('authorization')).toBe('Bearer lux_sec_test');
+		expect(await forwarded[1]?.json()).toEqual({
+			subject_id: 'verified-user',
 			notification: { title: 'Lux Lab', body: 'Push works' }
 		});
 	});

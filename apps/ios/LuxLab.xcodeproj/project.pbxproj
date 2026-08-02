@@ -56,6 +56,7 @@
 		2495C58D2568139DCD202ADE /* LabConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabConfiguration.swift; sourceTree = "<group>"; };
 		24FF95426EE43109B65E9217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		30092C5F8FBB6061597EC852 /* LuxLabTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = LuxLabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		345242E793108BE7376095FA /* BuildDefaults.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BuildDefaults.xcconfig; sourceTree = "<group>"; };
 		3C5B34026B6FB9F1CA9D000B /* LuxNotificationService.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = LuxNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		69075E52CDCE256964595703 /* LabConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabConfigurationTests.swift; sourceTree = "<group>"; };
 		915C1EB722F19E198898C267 /* lux-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "lux-swift"; path = "../../../lux-swift"; sourceTree = SOURCE_ROOT; };
@@ -95,6 +96,15 @@
 				3C5B34026B6FB9F1CA9D000B /* LuxNotificationService.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		963790333553BAC8AC7EDEE7 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				345242E793108BE7376095FA /* BuildDefaults.xcconfig */,
+			);
+			name = ios;
+			path = .;
 			sourceTree = "<group>";
 		};
 		9DE0E196F307D2633866F9BA /* Packages */ = {
@@ -139,6 +149,7 @@
 		F7D470B7ACDCC866F03B3C6C = {
 			isa = PBXGroup;
 			children = (
+				963790333553BAC8AC7EDEE7 /* ios */,
 				AA8B51B2CCB70C17BF158ADE /* LuxLab */,
 				E97F1A9C29F0EDDCD69D7051 /* LuxLabTests */,
 				D52F161E255EE52E0ACF1914 /* LuxNotificationService */,
@@ -301,6 +312,7 @@
 /* Begin XCBuildConfiguration section */
 		052612988CE804E80AD543B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 345242E793108BE7376095FA /* BuildDefaults.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				CODE_SIGN_ENTITLEMENTS = LuxLab/LuxLab.entitlements;
@@ -466,6 +478,7 @@
 		};
 		CD366E098E8DB47AE3232DD7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 345242E793108BE7376095FA /* BuildDefaults.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				CODE_SIGN_ENTITLEMENTS = LuxLab/LuxLab.entitlements;

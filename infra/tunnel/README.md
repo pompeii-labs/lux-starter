@@ -1,28 +1,34 @@
-# Device tunnel boundary
+# Public OAuth callback boundary
 
-A physical iPhone cannot use the engine's loopback URL, and Lux Swift correctly
-rejects cleartext remote HTTP. The device profile therefore uses a stable,
-trusted HTTPS hostname routed through Cloudflare Tunnel to the local engine.
+Lux Lab's iOS app connects directly to a private-LAN engine through Lux Swift's
+explicit `.localDevelopment` policy. It does not need a proxy for Auth, APNs
+registration, or normal API calls.
 
-The template in `config.example.yml` describes three optional origins:
+Google, GitHub, and Apple web OAuth are different: the provider must redirect
+to `/auth/v1/callback/<provider>` from the public internet. For those checks,
+temporarily expose only the engine's HTTP port with either ngrok or Tailscale
+Funnel. Ordinary Tailscale Serve is tailnet-only and cannot receive a provider
+callback. Native Sign in with Apple uses its direct token exchange and does not
+need this public route.
 
-- `engine.lab.luxdb.dev` routes to the Lux engine on loopback port 5890.
-- `web.lab.luxdb.dev` routes to SvelteKit on loopback port 5174.
-- `api.lab.luxdb.dev` routes to the Hono controller on loopback port 3000.
-
-Studio is intentionally absent. It remains loopback-only. The final catch-all
-returns 404 so an unknown hostname never falls through to a local service.
-
-Keep the tunnel credential JSON outside this repository and replace the
-template UUID with a dedicated tunnel. Add Cloudflare Access in front of the
-web and controller hostnames if they are exposed; do not place Access in front
-of the engine hostname because OAuth callbacks and the iOS client must reach
-Lux directly. Lux authentication and route authorization remain the engine's
-security boundary.
-
-Do not commit the rendered config or credentials. Validate it before running:
+## ngrok
 
 ```sh
-cloudflared tunnel ingress validate --config /path/to/lux-lab.yml
-cloudflared tunnel run --config /path/to/lux-lab.yml <TUNNEL_UUID>
+ngrok http 15890
 ```
+
+Use the assigned HTTPS origin to configure each provider's exact callback, for
+example `https://example.ngrok.app/auth/v1/callback/google`, and set the same
+redirect URI in the Lux provider configuration. The native app's final callback
+remains `lux-lab://auth/callback` and must be on the project's redirect allow
+list.
+
+## Tailscale Funnel
+
+If Funnel is enabled for the tailnet, expose local port 15890 and use the
+resulting public HTTPS origin for the same provider callback paths. Funnel—not
+Serve—is required because the provider is outside the tailnet.
+
+Do not expose Studio, RESP, or the controller API through this route. Stop the
+public endpoint immediately after the OAuth checks, and never commit tunnel
+credentials or assigned URLs.

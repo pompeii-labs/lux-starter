@@ -13,7 +13,7 @@ export default defineConfig({
 		})
 	],
 	server: {
-		port: 5174,
+		port: 15893,
 		strictPort: true,
 		allowedHosts: ['.e2b.app', '.luxdb.dev']
 	}

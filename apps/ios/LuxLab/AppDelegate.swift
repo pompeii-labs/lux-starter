@@ -14,6 +14,12 @@ final class AppDelegate: NSObject, UIApplicationDelegate, @preconcurrency UNUser
         return true
     }
 
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        Task { @MainActor in
+            await LabPlatform.shared.reconcileDeliveredNotifications()
+        }
+    }
+
     func application(
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
@@ -37,10 +43,12 @@ final class AppDelegate: NSObject, UIApplicationDelegate, @preconcurrency UNUser
         await MainActor.run {
             LabPlatform.shared.recordRemoteNotification(
                 notification.request.content.userInfo,
-                source: "foreground"
+                source: "foreground",
+                requestID: notification.request.identifier
             )
         }
-        return [.banner, .list, .sound, .badge]
+        try? await center.setBadgeCount(0)
+        return [.banner, .list, .sound]
     }
 
     func userNotificationCenter(
@@ -50,8 +58,21 @@ final class AppDelegate: NSObject, UIApplicationDelegate, @preconcurrency UNUser
         await MainActor.run {
             LabPlatform.shared.recordRemoteNotification(
                 response.notification.request.content.userInfo,
-                source: "tap · \(response.actionIdentifier)"
+                source: "tap · \(response.actionIdentifier)",
+                requestID: response.notification.request.identifier
             )
+        }
+        try? await center.setBadgeCount(0)
+    }
+
+    func application(
+        _ application: UIApplication,
+        didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+    ) {
+        Task { @MainActor in
+            LabPlatform.shared.recordRemoteNotification(userInfo, source: "background")
+            completionHandler(.noData)
         }
     }
 }

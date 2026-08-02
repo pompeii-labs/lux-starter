@@ -10,12 +10,13 @@
     "dev": "bun --filter '*' dev",
     "dev:api": "bun --filter @lux-lab/api dev",
     "dev:web": "bun --filter @lux-lab/web dev",
-    "test": "bun --filter '*' test",
+    "test": "bun test scripts && bun --filter '*' test",
     "check": "bun --filter '*' check",
     "build": "bun --filter '*' build",
     "env:local": "bun scripts/sync-local-env.ts",
     "smoke:local": "bun scripts/smoke-local.ts",
     "ios:generate": "cd apps/ios && xcodegen generate",
-    "ios:build": "xcodebuild -project apps/ios/LuxLab.xcodeproj -scheme LuxLab -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build"
+    "ios:build": "xcodebuild -project apps/ios/LuxLab.xcodeproj -scheme LuxLab -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build",
+    "ios:test": "bash scripts/test-ios.sh"
   }
 }

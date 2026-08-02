@@ -22,14 +22,19 @@ All routes are prefixed `/v1`.
 
 - `GET /v1/` — controller identity (public)
 - `GET /v1/health` — redacted engine health and capability check (public)
+- `POST /v1/me/push` — validate a user session and send only to that user
 - `GET /v1/push/stats` — push registry counts
 - `GET /v1/push/outbox` — queued and recent sends
 - `GET /v1/push/devices/:subjectID` — devices for one Lux Auth subject
 - `POST /v1/push/send` — send a validated notification to one subject
 
-The push routes require `Authorization: Bearer <LAB_CONTROLLER_KEY>` and proxy
+The push administration routes require `Authorization: Bearer <LAB_CONTROLLER_KEY>` and proxy
 the request with the Lux secret key. Requests are schema-validated and the
 health response never includes credentials.
+
+`/v1/me/push` instead requires a Lux user access token. The controller resolves
+the subject from that token before sending, so a client cannot target another
+user and never receives the controller or Lux secret key.
 
 ## Verify
 

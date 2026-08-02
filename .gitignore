@@ -7,6 +7,7 @@ lux/.env-profiles/
 lux/.backups/
 apps/ios/**/xcuserdata/
 apps/ios/.derivedData/
+apps/ios/LocalDevelopment.xcconfig
 *.xcuserstate
 DerivedData/
 .DS_Store

@@ -35,11 +35,19 @@
 	<false/>
 	<key>LuxAPNSEnvironment</key>
 	<string>sandbox</string>
+	<key>LuxLabAPIURL</key>
+	<string>$(LUX_LAB_API_URL)</string>
+	<key>LuxLabProjectURL</key>
+	<string>$(LUX_LAB_PROJECT_URL)</string>
+	<key>LuxLabPublishableKey</key>
+	<string>$(LUX_LAB_PUBLISHABLE_KEY)</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Lux Lab connects to the Lux engine running on your development Mac.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

@@ -53,6 +53,9 @@ targets:
         TARGETED_DEVICE_FAMILY: "1"
         SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: "NO"
         ASSETCATALOG_COMPILER_APPICON_NAME: ""
+    configFiles:
+      Debug: BuildDefaults.xcconfig
+      Release: BuildDefaults.xcconfig
     info:
       path: LuxLab/Info.plist
       properties:
@@ -60,9 +63,13 @@ targets:
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         ITSAppUsesNonExemptEncryption: false
+        NSLocalNetworkUsageDescription: Lux Lab connects to the Lux engine running on your development Mac.
         UILaunchScreen: {}
         UIBackgroundModes: [remote-notification]
         LuxAPNSEnvironment: sandbox
+        LuxLabAPIURL: $(LUX_LAB_API_URL)
+        LuxLabProjectURL: $(LUX_LAB_PROJECT_URL)
+        LuxLabPublishableKey: $(LUX_LAB_PUBLISHABLE_KEY)
         CFBundleURLTypes:
           - CFBundleURLName: dev.luxdb.lab.auth
             CFBundleURLSchemes: [lux-lab]

@@ -31,7 +31,8 @@ notification payloads into the record.
 
 ## Native Auth on a physical iPhone
 
-- [ ] The app connects through trusted HTTPS, never insecure LAN HTTP.
+- [ ] The app connects through trusted HTTPS, or through explicit
+  `.localDevelopment` policy to a private LAN address. Public HTTP is rejected.
 - [ ] A clean install begins signed out.
 - [ ] Email signup and password sign-in work.
 - [ ] Anonymous sign-in works.
@@ -62,6 +63,8 @@ notification payloads into the record.
 - [ ] Foreground delivery appears in the notification and diagnostics UI.
 - [ ] Background delivery arrives.
 - [ ] Terminated delivery arrives and is captured after launch/tap.
+- [ ] Opening the app clears the icon badge.
+- [ ] Observed notification history survives process termination and relaunch.
 - [ ] Badge, sound, category, thread, interruption level, and custom data decode.
 - [ ] A valid HTTPS image is added by the notification service extension.
 - [ ] An invalid or oversized image falls back to the original notification.

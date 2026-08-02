@@ -16,8 +16,8 @@ bun run env:local
 bun run dev:web
 ```
 
-The local page is fixed at `http://localhost:5174` and the OAuth return route is
-`http://localhost:5174/auth/callback`. Add that exact URL to the Lux provider
+The local page is fixed at `http://localhost:15893` and the OAuth return route is
+`http://localhost:15893/auth/callback`. Add that exact URL to the Lux provider
 redirect allow-list. Provider consoles still use the callback URL exposed by
 the Lux engine.
 
