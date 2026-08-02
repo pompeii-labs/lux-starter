@@ -6,8 +6,8 @@
   (`chore/engine-0.37.0`)
 - Lux Swift: `3b79f96d6f4075354a0e60d971fc0718af833ea6`
   (`fix/swift-1-1-hardening`)
-- Lux Lab: this `feat/lux-lab` commit (record its immutable remote SHA after
-  the branch is published)
+- Lux Lab: `925bcaac84a9847db91e8812fe364a937e8ce945`
+  (`feat/lux-lab` implementation candidate)
 - Engine profile: CLI-managed local project using the locally built
   `ghcr.io/lux-db/lux:pr-validation` image
 - Device: iPhone 17 running iOS 26.5.2, using a signed development build
