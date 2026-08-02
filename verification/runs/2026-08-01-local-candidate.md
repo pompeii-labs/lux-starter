@@ -60,9 +60,11 @@ in this record.
   service extension.
 - [x] Physical sign-out removed the server device row (one to zero).
 - [x] A later anonymous sign-in re-associated the retained token (zero to one).
-- [ ] Confirm the corrected app-active badge reset and persisted Diagnostics
-  receipt using a fresh notification on the latest installed build.
-- [ ] Confirm Keychain restoration after force-quit and manual token refresh.
+- [x] A fresh notification appeared in Diagnostics on the latest installed
+  build, the Home Screen badge cleared when the app became active, and the
+  receipt remained visible after a force-quit and relaunch.
+- [x] The authenticated user restored from Keychain after force-quit, and a
+  manual session refresh succeeded.
 - [ ] Complete native Apple authorization, including a repeat authorization.
 - [ ] Complete native password sign-in.
 - [ ] Complete Google and GitHub PKCE through a public HTTPS callback.
