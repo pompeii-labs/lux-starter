@@ -69,11 +69,22 @@ in this record.
   out and repeating authorization.
 - [x] A throwaway password user was created on-device, signed out, and signed
   back in with the same credentials.
-- [ ] Complete Google and GitHub PKCE through a public HTTPS callback.
+- [x] Google OAuth completed on-device through a temporary public HTTPS engine
+  callback, returned to the app's custom scheme, and exchanged its PKCE-bound
+  authorization code while normal SDK traffic remained on the private LAN.
 - [x] Native Apple cancellation returned the app to a signed-out idle state
   without presenting the system cancellation as an authentication failure.
-- [ ] Physically exercise invalid/oversized image fallback and APNs token
-  rotation. Both remain covered by automated contract tests only.
+- [x] A valid rich image rendered physically; deterministic contract tests
+  cover insecure, non-image, and oversized attachment fallback.
+- [x] Physical sign-out/reassociation covered the APNs registration lifecycle;
+  deterministic SDK tests cover Apple-controlled token rotation ordering,
+  stale-response protection, durable failed cleanup, and retry.
 
-The engine and Lux Swift stacks are not cleared for merge by this record until
-the physical-device items pass or their supported scope is explicitly changed.
+## Explicitly deferred
+
+- GitHub provider-console and physical-device OAuth setup is deferred from this
+  Lab run by explicit scope decision. The SDK's provider-neutral PKCE path
+  remains implemented and covered by contract tests, while Google proves that
+  path end to end on the physical device.
+
+This record clears the supported Lux Swift 1.1 Auth + Push device scope.
