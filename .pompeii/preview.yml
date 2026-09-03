@@ -1,0 +1,60 @@
+version: 1
+jobs:
+    setup:
+        mode: task
+        timeout: 15m
+        run: |
+            set -e
+            curl -fsSL https://luxdb.dev/install.sh | sh
+            bun install
+            lux start
+            LUX_URL=$(grep '^LUX_URL=' .env.local | head -1 | cut -d= -f2-)
+            LUX_SECRET_KEY=$(grep '^LUX_SECRET_KEY=' .env.local | head -1 | cut -d= -f2-)
+            LUX_PUBLISHABLE_KEY=$(grep '^LUX_PUBLISHABLE_KEY=' .env.local | head -1 | cut -d= -f2-)
+            STUDIO=$(docker ps --filter name=-studio --quiet | head -1)
+            docker exec "$STUDIO" sh -c 'sed -i "s#\"url\": \"[^\"]*\"#\"url\": \"{{ endpoints.lux.public_url }}\"#" /usr/share/nginx/html/config.json'
+            printf 'LUX_URL=%s\nLUX_SECRET_KEY=%s\n' "$LUX_URL" "$LUX_SECRET_KEY" > apps/api/.env
+            printf 'PUBLIC_LUX_URL={{ endpoints.lux.public_url }}\nPUBLIC_LUX_PUBLISHABLE_KEY=%s\nPUBLIC_API_URL={{ endpoints.api.public_url }}\nORIGIN={{ endpoints.web.public_url }}\n' "$LUX_PUBLISHABLE_KEY" > apps/web/.env
+    lux:
+        mode: service
+        run: sleep infinity
+        depends_on: [setup]
+        endpoints:
+            lux:
+                port: 5890
+                public: true
+                health:
+                    path: /auth/v1/.well-known/jwks.json
+    studio:
+        mode: service
+        run: sleep infinity
+        depends_on: [setup]
+        endpoints:
+            studio:
+                port: 5891
+                public: true
+                health:
+                    path: /
+    api:
+        mode: service
+        run: bun run dev:api
+        depends_on: [setup]
+        endpoints:
+            api:
+                port: 3000
+                public: true
+                health:
+                    path: /
+                    statuses: [200, 404]
+    web:
+        mode: service
+        run: bun run dev:web
+        depends_on: [setup, api, lux]
+        endpoints:
+            web:
+                port: 5173
+                public: true
+                primary: true
+                health:
+                    path: /
+                    statuses: [200, 301, 302, 307, 308]

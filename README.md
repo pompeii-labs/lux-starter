@@ -2,6 +2,9 @@
 
 A full-stack starter for small-team apps: auth, profiles, teams, members, and invites, updating in realtime.
 
+Pompeii discovers the starter metadata and deterministic local-like preview
+stack from `.pompeii/metadata.json` and `.pompeii/preview.yml`.
+
 ## Stack
 
 | Layer    | Tech                                                              |
