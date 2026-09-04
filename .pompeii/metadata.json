@@ -1,8 +1,4 @@
 {
     "version": 1,
-    "name": "Lux starter",
-    "description": "A full-stack starter for small-team apps with auth, profiles, teams, members, invites, and realtime updates.",
-    "workbenches": [
-        "lux"
-    ]
+    "workbench": "lux"
 }
