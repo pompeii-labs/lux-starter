@@ -1,6 +1,4 @@
 {
     "version": 1,
-    "name": "Full-stack web app",
-    "description": "A production-ready SvelteKit and Hono application backed by Lux.",
     "workbench": "lux"
 }
