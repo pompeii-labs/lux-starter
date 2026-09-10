@@ -2,9 +2,9 @@
 
 A full-stack starter for small-team apps: auth, profiles, teams, members, and invites, updating in realtime.
 
-Pompeii discovers the starter metadata and deterministic container preview
-from `.pompeii/metadata.json`, `.pompeii/preview.yml`, and the root
-`Dockerfile`. The same image can be published to Pompeii hosting.
+Pompeii discovers the starter metadata and complete runtime graph from
+`.pompeii/metadata.json` and `.pompeii/preview.yml`. The same graph powers
+interactive previews and Pompeii hosting.
 
 ## Stack
 
