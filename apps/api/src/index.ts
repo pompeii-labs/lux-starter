@@ -11,6 +11,7 @@ app.get("/", (c) => c.text("ok"));
 app.route("/", Router);
 
 const server = Bun.serve({
+    hostname: "0.0.0.0",
     port: 3000,
     fetch: app.fetch,
 });

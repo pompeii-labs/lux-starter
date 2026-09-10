@@ -2,16 +2,17 @@
 
 A full-stack starter for small-team apps: auth, profiles, teams, members, and invites, updating in realtime.
 
-Pompeii discovers the starter metadata and deterministic local-like preview
-stack from `.pompeii/metadata.json` and `.pompeii/preview.yml`.
+Pompeii discovers the starter metadata and deterministic container preview
+from `.pompeii/metadata.json`, `.pompeii/preview.yml`, and the root
+`Dockerfile`. The same image can be published to Pompeii hosting.
 
 ## Stack
 
-| Layer    | Tech                                                              |
-| -------- | ----------------------------------------------------------------- |
+| Layer    | Tech                                                                                               |
+| -------- | -------------------------------------------------------------------------------------------------- |
 | Frontend | [SvelteKit 2](https://svelte.dev/docs/kit) (Svelte 5), Tailwind 4, shadcn-svelte, superforms + zod |
-| Backend  | [Hono](https://hono.dev) on [Bun](https://bun.sh)                 |
-| Data     | [Lux](https://luxdb.dev) — tables, auth, and realtime on one connection |
+| Backend  | [Hono](https://hono.dev) on [Bun](https://bun.sh)                                                  |
+| Data     | [Lux](https://luxdb.dev) — tables, auth, and realtime on one connection                            |
 
 ```
 apps/
@@ -47,24 +48,25 @@ bun run dev
 
 ## Services & ports
 
-| Service        | Port | Command (from repo root)  |
-| -------------- | ---- | ------------------------- |
-| Web (SvelteKit)| 5173 | `bun run dev:web`         |
-| API (Hono)     | 3000 | `bun run dev:api`         |
-| Lux HTTP API   | 8080 | `lux start`               |
-| Lux (RESP)     | 6379 | `lux start`               |
+| Service         | Port | Command (from repo root) |
+| --------------- | ---- | ------------------------ |
+| Web (SvelteKit) | 5173 | `bun run dev:web`        |
+| API (Hono)      | 3000 | `bun run dev:api`        |
+| Lux HTTP API    | 8080 | `lux start`              |
+| Lux (RESP)      | 6379 | `lux start`              |
 
 Health check: `GET http://localhost:3000/v1` returns 200.
 
 ## Environment variables
 
-| App        | Variable                     | Purpose                                  |
-| ---------- | ---------------------------- | ---------------------------------------- |
-| `apps/web` | `PUBLIC_LUX_URL`             | Lux endpoint (browser + SSR)             |
-| `apps/web` | `PUBLIC_LUX_PUBLISHABLE_KEY` | Public key; row-level security enforced  |
-| `apps/web` | `PUBLIC_API_URL`             | Base URL of the Hono API                 |
-| `apps/api` | `LUX_URL`                    | Lux endpoint                             |
-| `apps/api` | `LUX_SECRET_KEY`             | Full-access key — server only            |
+| App               | Variable                     | Purpose                                 |
+| ----------------- | ---------------------------- | --------------------------------------- |
+| browser           | `PUBLIC_LUX_URL`             | Public Lux endpoint                     |
+| browser           | `PUBLIC_LUX_PUBLISHABLE_KEY` | Public key; row-level security enforced |
+| browser           | `PUBLIC_API_URL`             | Public Hono API endpoint                |
+| server processes  | `LUX_URL`                    | Internal Lux endpoint                   |
+| SvelteKit server  | `API_URL`                    | Internal Hono API endpoint              |
+| API               | `LUX_SECRET_KEY`             | Full-access key — server only           |
 
 ## Production build
 
@@ -95,9 +97,9 @@ It installs the Lux CLI and runs `lux migrate run <project> --dir lux/migrations
 
 Set these in the repo's GitHub settings before it can run:
 
-| Kind     | Name          | Where                              | Value                                        |
-| -------- | ------------- | ---------------------------------- | -------------------------------------------- |
-| Secret   | `LUX_API_KEY` | Settings → Secrets and variables → Actions → Secrets   | A `lux_...` key from your Lux dashboard      |
-| Variable | `LUX_PROJECT` | Settings → Secrets and variables → Actions → Variables | Your Lux project name, ID, or slug           |
+| Kind     | Name          | Where                                                  | Value                                   |
+| -------- | ------------- | ------------------------------------------------------ | --------------------------------------- |
+| Secret   | `LUX_API_KEY` | Settings → Secrets and variables → Actions → Secrets   | A `lux_...` key from your Lux dashboard |
+| Variable | `LUX_PROJECT` | Settings → Secrets and variables → Actions → Variables | Your Lux project name, ID, or slug      |
 
 `LUX_API_KEY` is a full-access key — keep it a secret, never a variable.

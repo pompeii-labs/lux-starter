@@ -1,0 +1,11 @@
+.git
+.github
+.codex
+**/.env
+**/.env.*
+!**/.env.example
+**/node_modules
+**/.svelte-kit
+**/build
+**/.DS_Store
+lux/.lux-local.json

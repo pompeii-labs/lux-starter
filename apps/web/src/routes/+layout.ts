@@ -1,27 +1,30 @@
 // src/routes/+layout.ts
-import { PUBLIC_LUX_URL, PUBLIC_LUX_PUBLISHABLE_KEY } from '$env/static/public';
 import { createBrowserClient, createServerClient } from '@luxdb/sdk';
 import type { Database } from '$lib/types/lux';
+import { requirePublicEnv } from '$lib/public-env';
 import type { LayoutLoad } from './$types';
 
 export const load: LayoutLoad = async ({ fetch, data, depends }) => {
-	depends('lux:auth');
+    depends('lux:auth');
 
-	const lux = (typeof window !== "undefined" && typeof window.document !== "undefined")
-		? createBrowserClient<Database>(PUBLIC_LUX_URL, PUBLIC_LUX_PUBLISHABLE_KEY, {
-				fetch,
-			})
-		: createServerClient<Database>(PUBLIC_LUX_URL, PUBLIC_LUX_PUBLISHABLE_KEY, {
-				fetch,
-				cookies: {
-					getAll() {
-						return data.cookies;
-					},
-				},
-			});
+    const luxUrl = requirePublicEnv('PUBLIC_LUX_URL');
+    const publishableKey = requirePublicEnv('PUBLIC_LUX_PUBLISHABLE_KEY');
+    const lux =
+        typeof window !== 'undefined' && typeof window.document !== 'undefined'
+            ? createBrowserClient<Database>(luxUrl, publishableKey, {
+                  fetch,
+              })
+            : createServerClient<Database>(luxUrl, publishableKey, {
+                  fetch,
+                  cookies: {
+                      getAll() {
+                          return data.cookies;
+                      },
+                  },
+              });
 
-	const { data: sessionData, error } = await lux.auth.getSession();
-	const session = error ? null : sessionData?.session
+    const { data: sessionData, error } = await lux.auth.getSession();
+    const session = error ? null : sessionData?.session;
 
-	return { lux, session };
+    return { lux, session };
 };
